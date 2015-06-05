@@ -63,7 +63,6 @@ class GameController {
             respond game.errors, view:'edit'
             return
         }
-
         game.save flush:true
 
         request.withFormat {
@@ -103,5 +102,11 @@ class GameController {
             }
             '*'{ render status: NOT_FOUND }
         }
+    }
+
+    def play(Game game) { 
+        game.grid.init()
+        game.grid.fillGrid()
+        [cells:game.grid.cells] 
     }
 }
