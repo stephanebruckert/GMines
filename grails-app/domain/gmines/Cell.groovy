@@ -7,10 +7,4 @@ class Cell {
 
     static belongsTo = [grid:Grid]
 
-    static constraints = {
-    }
-
-    void setMine() {
-    	isMine = true
-    }
 }

@@ -21,6 +21,10 @@ class GameController {
         respond new Game(params)
     }
 
+    def edit(Game game) {
+        respond game
+    }
+
     @Transactional
     def save(Game game) {
         if (game == null) {
@@ -35,6 +39,10 @@ class GameController {
             return
         }
 
+        game.grid = new Grid()
+        game.grid.init()
+        game.grid.fillGrid()
+        game.grid.findAdjacentCell()
         game.save flush:true
 
         request.withFormat {
@@ -44,10 +52,6 @@ class GameController {
             }
             '*' { respond game, [status: CREATED] }
         }
-    }
-
-    def edit(Game game) {
-        respond game
     }
 
     @Transactional
@@ -63,6 +67,7 @@ class GameController {
             respond game.errors, view:'edit'
             return
         }
+
         game.save flush:true
 
         request.withFormat {
@@ -105,8 +110,6 @@ class GameController {
     }
 
     def play(Game game) { 
-        game.grid.init()
-        game.grid.fillGrid()
-        [cells:game.grid.cells] 
+        [cells:game.grid.cells.collate(16)] 
     }
 }
