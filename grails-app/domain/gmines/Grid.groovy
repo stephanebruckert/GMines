@@ -68,5 +68,45 @@ class Grid {
 		}
 	}
 
+	public void tryUnfold(int x, int y) {
+		Cell[][] cellz = cells.collate(edgeSize)
+		if (!cellz[x][y].isMine && cellz[x][y].nbCellsAdjacent == 0) {
+			unfoldGaps(x, y, cellz)
+		}
+	}
+
+	/**
+	 * When player click on a cell which has not adjacent mine, we search recursivly all other
+	 * adjacent cell which has not adjacents mines (see result in game, it's when cell picture has no number)
+	 */
+	public void unfoldGaps(int x, int y, Cell[][] cellz){
+		cellz[x][y].isDiscovered = true
+
+		if( x<(edgeSize-1) && !cellz[x+1][y].isMine && cellz[x+1][y].nbCellsAdjacent == 0 && !cellz[x+1][y].isDiscovered) {
+			unfoldGaps(x+1, y, cellz)
+		}
+		if( y<(edgeSize-1) && !cellz[x][y+1].isMine && cellz[x][y+1].nbCellsAdjacent == 0 && !cellz[x][y+1].isDiscovered) {
+			unfoldGaps(x, y+1, cellz)
+		}
+		if( x>0 && !cellz[x-1][y].isMine && cellz[x-1][y].nbCellsAdjacent == 0 && !cellz[x-1][y].isDiscovered) {
+			unfoldGaps(x-1, y, cellz)
+		}
+		if( y>0 && !cellz[x][y-1].isMine && cellz[x][y-1].nbCellsAdjacent == 0 && !cellz[x][y-1].isDiscovered) {
+			unfoldGaps(x, y-1, cellz)
+		}
+		if( x<(edgeSize-1) && y<(edgeSize-1) && !cellz[x+1][y+1].isMine && cellz[x+1][y+1].nbCellsAdjacent == 0 && !cellz[x+1][y+1].isDiscovered) {
+			unfoldGaps(x+1, y+1, cellz)
+		}
+		if( x>0 && y<(edgeSize-1) && !cellz[x-1][y+1].isMine && cellz[x-1][y+1].nbCellsAdjacent == 0 && !cellz[x-1][y+1].isDiscovered) {
+			unfoldGaps(x-1, y+1, cellz)
+		}
+		if( x>0 && y>0 && !cellz[x-1][y-1].isMine && cellz[x-1][y-1].nbCellsAdjacent == 0 && !cellz[x-1][y-1].isDiscovered) {
+			unfoldGaps(x-1, y-1, cellz)
+		}
+		if( x<(edgeSize-1) && y>0 && !cellz[x+1][y-1].isMine && cellz[x+1][y-1].nbCellsAdjacent == 0 && !cellz[x+1][y-1].isDiscovered) {
+			unfoldGaps(x+1, y-1, cellz)
+		}
+	}
+
 
 }

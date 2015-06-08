@@ -11,4 +11,7 @@ class Game {
         grid nullable: true
     }
 
+    void stroke(int x, int y) {
+    	grid.tryUnfold(x, y)
+    }
 }

@@ -30,9 +30,9 @@ class GameController {
     }
 
     @Transactional
-    def stroke() {
-        // do anything to play the cell
-        redirect action:"play", method:"GET", id:params.id
+    def stroke(Game game) {
+        game.stroke(params.int('x'), params.int('y'))
+        redirect action:"play", method:"GET", id:game.id
     }
 
     @Transactional
