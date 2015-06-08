@@ -25,6 +25,16 @@ class GameController {
         respond game
     }
 
+    def play(Game game) { 
+        respond game, model:[cells:game.grid.cells.collate(16)]
+    }
+
+    @Transactional
+    def stroke() {
+        // do anything to play the cell
+        redirect action:"play", method:"GET", id:params.id
+    }
+
     @Transactional
     def save(Game game) {
         if (game == null) {
@@ -81,7 +91,6 @@ class GameController {
 
     @Transactional
     def delete(Game game) {
-
         if (game == null) {
             transactionStatus.setRollbackOnly()
             notFound()
@@ -109,7 +118,4 @@ class GameController {
         }
     }
 
-    def play(Game game) { 
-        [cells:game.grid.cells.collate(16)] 
-    }
 }
