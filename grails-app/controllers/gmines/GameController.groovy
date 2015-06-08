@@ -26,7 +26,7 @@ class GameController {
     }
 
     def play(Game game) { 
-        respond game, model:[cells:game.grid.cells.collate(16)]
+        respond game, model:[cells:game.grid.getDisplayableGrid()]
     }
 
     @Transactional

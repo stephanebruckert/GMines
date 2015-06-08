@@ -12,6 +12,6 @@ class Game {
     }
 
     void stroke(int x, int y) {
-    	grid.tryUnfold(x, y)
+    	grid.discover(x, y)
     }
 }

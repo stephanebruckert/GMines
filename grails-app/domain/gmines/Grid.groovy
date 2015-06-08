@@ -68,10 +68,13 @@ class Grid {
 		}
 	}
 
-	public void tryUnfold(int x, int y) {
+	public void discover(int x, int y) {
 		Cell[][] cellz = cells.collate(edgeSize)
 		if (!cellz[x][y].isMine && cellz[x][y].nbCellsAdjacent == 0) {
 			unfoldGaps(x, y, cellz)
+			unfoldBorder(cellz)
+		} else {
+			cellz[x][y].isDiscovered = true
 		}
 	}
 
@@ -108,5 +111,70 @@ class Grid {
 		}
 	}
 
+	/**
+	 * When we click in a cell which has no adjacents mines, we discover
+	 * the cells border, so the eight adjacents cells. These cells contains
+	 * perforce number.
+	 */
+	public void unfoldBorder(Cell[][] cellz){
+		for (int x = 0; x < edgeSize ; x++) {
+			for (int y = 0; y < edgeSize; y++) {
+				if( cellz[x][y].nbCellsAdjacent == 0 && cellz[x][y].isDiscovered && !cellz[x][y].isMine ) {
 
+					if( x<(edgeSize-1) 
+						&& !cellz[x+1][y].isDiscovered) {
+						cellz[x+1][y].isDiscovered = true
+					}
+					if( x<(edgeSize-1) && y<(edgeSize-1)  
+						&& !cellz[x+1][y+1].isDiscovered) {
+						cellz[x+1][y+1].isDiscovered = true
+					}
+					if( y<(edgeSize-1) 
+						&& !cellz[x][y+1].isDiscovered) {
+						cellz[x][y+1].isDiscovered = true
+					}
+					if( y<(edgeSize-1) && x>0 
+						&& !cellz[x-1][y+1].isDiscovered) {
+						cellz[x-1][y+1].isDiscovered = true
+					}
+					if( x>0 
+						&& !cellz[x-1][y].isDiscovered) {
+						cellz[x-1][y].isDiscovered = true
+					}
+					if( x>0 && y>0 
+						&& !cellz[x-1][y-1].isDiscovered) {
+						cellz[x-1][y-1].isDiscovered = true
+					}
+					if( y>0 
+						&& !cellz[x][y-1].isDiscovered) {
+						cellz[x][y-1].isDiscovered = true
+					}
+					if( x<(edgeSize-1) && y>0 
+						&& !cellz[x+1][y-1].isDiscovered) {
+						cellz[x+1][y-1].isDiscovered = true
+					}
+
+				}
+			}
+		}
+	}
+
+	public String[][] getDisplayableGrid() {
+		String[][] icons = new String[edgeSize][edgeSize]
+		Cell[][] cellz = cells.collate(edgeSize)
+		Cell cell
+		for (int x = 0; x < edgeSize ; x++) {
+			for (int y = 0; y < edgeSize; y++) {
+				cell = cellz[x][y]
+				if (!cell.isDiscovered) {
+					icons[x][y] = "game/bombHover.png"
+				} else if (cell.isMine) {
+					icons[x][y] = "game/hisMine.png"
+				} else {
+					icons[x][y] = "game/" + cell.nbCellsAdjacent + ".png"
+				}
+			}
+		}
+		return icons
+	}
 }
