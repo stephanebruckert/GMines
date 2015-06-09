@@ -19,11 +19,24 @@
             <g:if test="${flash.message}">
             <div class="message" role="status">${flash.message}</div>
             </g:if>
-            <f:display bean="game" />
+            <div id="board">
+                <div id="grid">
+                    <g:each in="${cells}" var="row" status="rowcount">
+                        <g:each in="${row}" var="cell" status="colcount">
+                            <g:form controller="game" action="stroke">
+                                <g:hiddenField name="x" value="${rowcount}" />
+                                <g:hiddenField name="y" value="${colcount}" />
+                                <g:hiddenField name="id" value="${game.id}" />
+                                <g:actionSubmitImage value="stroke" action="stroke" 
+                                    src="${resource(dir: 'images', file: cell)}" />
+                            </g:form>
+                        </g:each>
+                    </g:each>
+                </div>
+            </div>
             </ol>
             <g:form resource="${game}" method="DELETE">
                 <fieldset class="buttons">
-                    <g:link class="edit" action="edit" resource="${game}"><g:message code="default.button.edit.label" default="Edit" /></g:link>
                     <input class="delete" type="submit" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" />
                 </fieldset>
             </g:form>

@@ -14,25 +14,33 @@ class GameController {
     }
 
     def show(Game game) {
-        respond game
+        if (game.player1 == session.nickname) {
+            game.player1lastActivity = new Date()
+        } else if (game.player2 == null) {
+            game.player2 = session.nickname
+            game.player2lastActivity = new Date()
+        } else if (game.player2 == session.nickname) {
+            game.player2lastActivity = new Date()
+        }
+        game.save flush:true
+
+        request.withFormat {
+            form multipartForm {
+                flash.message = message(code: 'default.created.message', args: [message(code: 'game.label', default: 'Game'), game.id])
+                redirect game
+            }
+            '*' { respond game, model:[cells:game.grid.getDisplayableGrid()] }
+        }
     }
 
     def create() {
         respond new Game(params)
     }
 
-    def edit(Game game) {
-        respond game
-    }
-
-    def play(Game game) { 
-        respond game, model:[cells:game.grid.getDisplayableGrid()]
-    }
-
     @Transactional
     def stroke(Game game) {
         game.stroke(params.int('x'), params.int('y'))
-        redirect action:"play", method:"GET", id:game.id
+        redirect action:"show", method:"GET", id:game.id
     }
 
     @Transactional
@@ -49,6 +57,7 @@ class GameController {
             return
         }
 
+        game.player1 = session.nickname
         game.grid = new Grid()
         game.grid.init()
         game.grid.fillGrid()
