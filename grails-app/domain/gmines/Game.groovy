@@ -21,9 +21,23 @@ class Game {
         player2shouldPlay display: false
     }
 
-    void stroke(int x, int y) {
-    	if (grid.discover(x, y)) {
-            actionCount++;
+    void stroke(int x, int y, String nickname) {
+        if (sessionShouldPlay(nickname)) {
+        	if (grid.discover(x, y)) {
+                actionCount++;
+            }
+        }
+    }
+
+    // Lets us know whether the session who played
+    // should have played
+    boolean sessionShouldPlay(String nickname) {
+        if (nickname.equals(player1) && !player2shouldPlay) {
+            return true
+        } else if (nickname.equals(player2) && player2shouldPlay) {
+            return true
+        } else {
+            return false
         }
     }
 }

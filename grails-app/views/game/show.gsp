@@ -8,7 +8,7 @@
           $(function() {
             var i = 0;
             var actionCount = ${game.actionCount};
-            
+
             function afficheConversation() {
                 $.ajax({
                     url:"${g.createLink(controller:'game',action:'refresh', id:game.id)}",
@@ -43,7 +43,7 @@
         </div>
         <div id="ajax">init</div>
         <div id="show-game" class="content scaffold-show" role="main">
-            <h1><g:message code="default.show.label" args="[entityName]" /></h1>
+            <h1>${session.nickname}</h1>
             <g:if test="${flash.message}">
             <div class="message" role="status">${flash.message}</div>
             </g:if>
@@ -63,11 +63,12 @@
                 </div>
             </div>
             </ol>
-            <g:form resource="${game}" method="DELETE">
+            <!--<g:form resource="${game}" method="DELETE">
                 <fieldset class="buttons">
                     <input class="delete" type="submit" value="${message(code: 'default.button.delete.label', default: 'Delete')}" onclick="return confirm('${message(code: 'default.button.delete.confirm.message', default: 'Are you sure?')}');" />
                 </fieldset>
             </g:form>
+            -->
         </div>
     </body>
 </html>

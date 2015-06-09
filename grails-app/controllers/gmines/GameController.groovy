@@ -14,17 +14,6 @@ class GameController {
     }
 
     def show(Game game) {
-        if (game.player1 == session.nickname) {
-            game.player1lastActivity = new Date()
-        } else if (game.player2 == null) {
-            game.player2 = session.nickname
-            game.player2lastActivity = new Date()
-            game.actionCount++
-        } else if (game.player2 == session.nickname) {
-            game.player2lastActivity = new Date()
-        }
-        game.save flush:true
-
         request.withFormat {
             form multipartForm {
                 flash.message = message(code: 'default.created.message', args: [message(code: 'game.label', default: 'Game'), game.id])
@@ -44,7 +33,17 @@ class GameController {
 
     @Transactional
     def stroke(Game game) {
-        game.stroke(params.int('x'), params.int('y'))
+         if (game.player1 == session.nickname) {
+            game.player1lastActivity = new Date()
+        } else if (game.player2 == null) {
+            game.player2 = session.nickname
+            game.player2lastActivity = new Date()
+            game.actionCount++
+        } else if (game.player2 == session.nickname) {
+            game.player2lastActivity = new Date()
+        }
+        game.stroke(params.int('x'), params.int('y'), session.nickname)
+        game.save(flush:true)
         redirect action:"show", method:"GET", id:game.id
     }
 
@@ -75,50 +74,6 @@ class GameController {
                 redirect game
             }
             '*' { respond game, [status: CREATED] }
-        }
-    }
-
-    @Transactional
-    def update(Game game) {
-        if (game == null) {
-            transactionStatus.setRollbackOnly()
-            notFound()
-            return
-        }
-
-        if (game.hasErrors()) {
-            transactionStatus.setRollbackOnly()
-            respond game.errors, view:'edit'
-            return
-        }
-
-        game.save flush:true
-
-        request.withFormat {
-            form multipartForm {
-                flash.message = message(code: 'default.updated.message', args: [message(code: 'game.label', default: 'Game'), game.id])
-                redirect game
-            }
-            '*'{ respond game, [status: OK] }
-        }
-    }
-
-    @Transactional
-    def delete(Game game) {
-        if (game == null) {
-            transactionStatus.setRollbackOnly()
-            notFound()
-            return
-        }
-
-        game.delete flush:true
-
-        request.withFormat {
-            form multipartForm {
-                flash.message = message(code: 'default.deleted.message', args: [message(code: 'game.label', default: 'Game'), game.id])
-                redirect action:"index", method:"GET"
-            }
-            '*'{ render status: NO_CONTENT }
         }
     }
 
