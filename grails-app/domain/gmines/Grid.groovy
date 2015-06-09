@@ -68,13 +68,20 @@ class Grid {
 		}
 	}
 
-	public void discover(int x, int y) {
+	public boolean discover(int x, int y) {
 		Cell[][] cellz = cells.collate(edgeSize)
-		if (!cellz[x][y].isMine && cellz[x][y].nbCellsAdjacent == 0) {
-			unfoldGaps(x, y, cellz)
-			unfoldBorder(cellz)
+		if (cellz[x][y].isDiscovered) {
+			// action is not relevant
+			return false
 		} else {
-			cellz[x][y].isDiscovered = true
+			// action is relevant
+			if (!cellz[x][y].isMine && cellz[x][y].nbCellsAdjacent == 0) {
+				unfoldGaps(x, y, cellz)
+				unfoldBorder(cellz)
+			} else {
+				cellz[x][y].isDiscovered = true
+			}
+			return true
 		}
 	}
 

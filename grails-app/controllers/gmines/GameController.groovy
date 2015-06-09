@@ -19,6 +19,7 @@ class GameController {
         } else if (game.player2 == null) {
             game.player2 = session.nickname
             game.player2lastActivity = new Date()
+            game.actionCount++
         } else if (game.player2 == session.nickname) {
             game.player2lastActivity = new Date()
         }
@@ -31,6 +32,10 @@ class GameController {
             }
             '*' { respond game, model:[cells:game.grid.getDisplayableGrid()] }
         }
+    }
+
+    def refresh(Game game) {
+        render game.actionCount
     }
 
     def create() {

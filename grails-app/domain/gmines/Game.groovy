@@ -8,6 +8,7 @@ class Game {
 	Date player1lastActivity = new Date()
 	Date player2lastActivity
 	boolean player2shouldPlay = true
+    int actionCount = -1
 
     static constraints = {
         grid display: false
@@ -21,6 +22,8 @@ class Game {
     }
 
     void stroke(int x, int y) {
-    	grid.discover(x, y)
+    	if (grid.discover(x, y)) {
+            actionCount++;
+        }
     }
 }
