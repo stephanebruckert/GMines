@@ -1,6 +1,7 @@
 package gmines
 
 import gmines.*
+import java.awt.Point
 
 class Grid {
 	int nbBomb = 51
@@ -8,12 +9,16 @@ class Grid {
 
 	List cells = []
 
+	Point lastPlayer1
+	Point lastPlayer2
+
 	static belongsTo = [game:Game]
 
 	static hasMany = [cells:Cell]
 
 	static constraints = {
-		
+		lastPlayer1 nullable: true
+		lastPlayer2 nullable: true
 	}
 
 	/**
@@ -68,21 +73,33 @@ class Grid {
 		}
 	}
 
-	public boolean discover(int x, int y) {
+	public boolean discover(int x, int y, String nickname) {
 		Cell[][] cellz = cells.collate(edgeSize)
-		if (cellz[x][y].isDiscovered) {
+		if (cellz[x][y].isDiscovered >= 0) {
 			// action is not relevant
 			return false
 		} else {
 			// action is relevant
 			if (!cellz[x][y].isMine && cellz[x][y].nbCellsAdjacent == 0) {
+				// cell 0
 				unfoldGaps(x, y, cellz)
 				unfoldBorder(cellz)
 			} else if (cellz[x][y].isMine) {
-				cellz[x][y].isDiscovered = true
+				// mine
+				if (nickname.equals(game.player1)) {
+					cellz[x][y].isDiscovered = 1
+				} else {
+					cellz[x][y].isDiscovered = 0
+				}
 			} else {
+				// cell 1 2 3 4 5 6 7 or 8
 				game.player2shouldPlay = !game.player2shouldPlay
-				cellz[x][y].isDiscovered = true
+				cellz[x][y].isDiscovered = 1
+			}
+			if (nickname.equals(game.player1)) {
+				lastPlayer1 = new Point(x, y)
+			} else {
+				lastPlayer2 = new Point(x, y)
 			}
 			return true
 		}
@@ -93,30 +110,30 @@ class Grid {
 	 * adjacent cell which has not adjacents mines (see result in game, it's when cell picture has no number)
 	 */
 	public void unfoldGaps(int x, int y, Cell[][] cellz){
-		cellz[x][y].isDiscovered = true
+		cellz[x][y].isDiscovered = 1
 
-		if( x<(edgeSize-1) && !cellz[x+1][y].isMine && cellz[x+1][y].nbCellsAdjacent == 0 && !cellz[x+1][y].isDiscovered) {
+		if( x<(edgeSize-1) && !cellz[x+1][y].isMine && cellz[x+1][y].nbCellsAdjacent == 0 && cellz[x+1][y].isDiscovered == -1) {
 			unfoldGaps(x+1, y, cellz)
 		}
-		if( y<(edgeSize-1) && !cellz[x][y+1].isMine && cellz[x][y+1].nbCellsAdjacent == 0 && !cellz[x][y+1].isDiscovered) {
+		if( y<(edgeSize-1) && !cellz[x][y+1].isMine && cellz[x][y+1].nbCellsAdjacent == 0 && cellz[x][y+1].isDiscovered == -1) {
 			unfoldGaps(x, y+1, cellz)
 		}
-		if( x>0 && !cellz[x-1][y].isMine && cellz[x-1][y].nbCellsAdjacent == 0 && !cellz[x-1][y].isDiscovered) {
+		if( x>0 && !cellz[x-1][y].isMine && cellz[x-1][y].nbCellsAdjacent == 0 && cellz[x-1][y].isDiscovered == -1) {
 			unfoldGaps(x-1, y, cellz)
 		}
-		if( y>0 && !cellz[x][y-1].isMine && cellz[x][y-1].nbCellsAdjacent == 0 && !cellz[x][y-1].isDiscovered) {
+		if( y>0 && !cellz[x][y-1].isMine && cellz[x][y-1].nbCellsAdjacent == 0 && cellz[x][y-1].isDiscovered == -1) {
 			unfoldGaps(x, y-1, cellz)
 		}
-		if( x<(edgeSize-1) && y<(edgeSize-1) && !cellz[x+1][y+1].isMine && cellz[x+1][y+1].nbCellsAdjacent == 0 && !cellz[x+1][y+1].isDiscovered) {
+		if( x<(edgeSize-1) && y<(edgeSize-1) && !cellz[x+1][y+1].isMine && cellz[x+1][y+1].nbCellsAdjacent == 0 && cellz[x+1][y+1].isDiscovered == -1) {
 			unfoldGaps(x+1, y+1, cellz)
 		}
-		if( x>0 && y<(edgeSize-1) && !cellz[x-1][y+1].isMine && cellz[x-1][y+1].nbCellsAdjacent == 0 && !cellz[x-1][y+1].isDiscovered) {
+		if( x>0 && y<(edgeSize-1) && !cellz[x-1][y+1].isMine && cellz[x-1][y+1].nbCellsAdjacent == 0 && cellz[x-1][y+1].isDiscovered == -1) {
 			unfoldGaps(x-1, y+1, cellz)
 		}
-		if( x>0 && y>0 && !cellz[x-1][y-1].isMine && cellz[x-1][y-1].nbCellsAdjacent == 0 && !cellz[x-1][y-1].isDiscovered) {
+		if( x>0 && y>0 && !cellz[x-1][y-1].isMine && cellz[x-1][y-1].nbCellsAdjacent == 0 && cellz[x-1][y-1].isDiscovered == -1) {
 			unfoldGaps(x-1, y-1, cellz)
 		}
-		if( x<(edgeSize-1) && y>0 && !cellz[x+1][y-1].isMine && cellz[x+1][y-1].nbCellsAdjacent == 0 && !cellz[x+1][y-1].isDiscovered) {
+		if( x<(edgeSize-1) && y>0 && !cellz[x+1][y-1].isMine && cellz[x+1][y-1].nbCellsAdjacent == 0 && cellz[x+1][y-1].isDiscovered == -1) {
 			unfoldGaps(x+1, y-1, cellz)
 		}
 	}
@@ -129,39 +146,39 @@ class Grid {
 	public void unfoldBorder(Cell[][] cellz){
 		for (int x = 0; x < edgeSize ; x++) {
 			for (int y = 0; y < edgeSize; y++) {
-				if( cellz[x][y].nbCellsAdjacent == 0 && cellz[x][y].isDiscovered && !cellz[x][y].isMine ) {
+				if( cellz[x][y].nbCellsAdjacent == 0 && cellz[x][y].isDiscovered >= 0 && !cellz[x][y].isMine ) {
 
 					if( x<(edgeSize-1) 
-						&& !cellz[x+1][y].isDiscovered) {
-						cellz[x+1][y].isDiscovered = true
+						&& cellz[x+1][y].isDiscovered == -1) {
+						cellz[x+1][y].isDiscovered = 1
 					}
 					if( x<(edgeSize-1) && y<(edgeSize-1)  
-						&& !cellz[x+1][y+1].isDiscovered) {
-						cellz[x+1][y+1].isDiscovered = true
+						&& cellz[x+1][y+1].isDiscovered == -1) {
+						cellz[x+1][y+1].isDiscovered = 1
 					}
 					if( y<(edgeSize-1) 
-						&& !cellz[x][y+1].isDiscovered) {
-						cellz[x][y+1].isDiscovered = true
+						&& cellz[x][y+1].isDiscovered == -1) {
+						cellz[x][y+1].isDiscovered = 1
 					}
 					if( y<(edgeSize-1) && x>0 
-						&& !cellz[x-1][y+1].isDiscovered) {
-						cellz[x-1][y+1].isDiscovered = true
+						&& cellz[x-1][y+1].isDiscovered == -1) {
+						cellz[x-1][y+1].isDiscovered = 1
 					}
 					if( x>0 
-						&& !cellz[x-1][y].isDiscovered) {
-						cellz[x-1][y].isDiscovered = true
+						&& cellz[x-1][y].isDiscovered == -1) {
+						cellz[x-1][y].isDiscovered = 1
 					}
 					if( x>0 && y>0 
-						&& !cellz[x-1][y-1].isDiscovered) {
-						cellz[x-1][y-1].isDiscovered = true
+						&& cellz[x-1][y-1].isDiscovered == -1) {
+						cellz[x-1][y-1].isDiscovered = 1
 					}
 					if( y>0 
-						&& !cellz[x][y-1].isDiscovered) {
-						cellz[x][y-1].isDiscovered = true
+						&& cellz[x][y-1].isDiscovered == -1) {
+						cellz[x][y-1].isDiscovered = 1
 					}
 					if( x<(edgeSize-1) && y>0 
-						&& !cellz[x+1][y-1].isDiscovered) {
-						cellz[x+1][y-1].isDiscovered = true
+						&& cellz[x+1][y-1].isDiscovered == -1) {
+						cellz[x+1][y-1].isDiscovered = 1
 					}
 
 				}
@@ -176,14 +193,33 @@ class Grid {
 		for (int x = 0; x < edgeSize ; x++) {
 			for (int y = 0; y < edgeSize; y++) {
 				cell = cellz[x][y]
-				if (!cell.isDiscovered) {
+				if (cell.isDiscovered == -1) {
 					icons[x][y] = "game/bombHover.png"
 				} else if (cell.isMine) {
-					icons[x][y] = "game/hisMine.png"
+					if (cell.isDiscovered == 1) {
+						icons[x][y] = "game/hisMine.png"
+					} else {
+						icons[x][y] = "game/myMine.png"
+					}
 				} else {
 					icons[x][y] = "game/" + cell.nbCellsAdjacent + ".png"
 				}
 			}
+		}
+
+		return applyLastCoordinates(icons)
+	}
+
+	private String[][] applyLastCoordinates(String[][] icons) {
+		// set last mine played
+		String str;
+		if (lastPlayer1 != null) {
+			str = icons[(int)lastPlayer1.x][(int)lastPlayer1.y]
+			icons[(int)lastPlayer1.x][(int)lastPlayer1.y] = str.substring(0, str.lastIndexOf('.')) + "Blue.png"
+		}
+		if (lastPlayer2 != null) {
+			str = icons[(int)lastPlayer2.x][(int)lastPlayer2.y]
+			icons[(int)lastPlayer2.x][(int)lastPlayer2.y] = str.substring(0, str.lastIndexOf('.')) + "Red.png"
 		}
 		return icons
 	}

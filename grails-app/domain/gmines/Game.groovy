@@ -23,7 +23,7 @@ class Game {
 
     void stroke(int x, int y, String nickname) {
         if (sessionShouldPlay(nickname)) {
-        	if (grid.discover(x, y)) {
+        	if (grid.discover(x, y, nickname)) {
                 actionCount++;
             }
         }
