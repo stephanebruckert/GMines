@@ -3,9 +3,7 @@ package gmines
 class UserController {
 
     def index() {
-    	if (session.nickname != null) {
-    		redirect(controller:"game", action:"index")
-    	}
+
     }
 
     def join(String nickname) {

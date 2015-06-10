@@ -8,7 +8,8 @@ class UrlMappings {
         }
 
         "/" (controller:"user", action:"index")
-        "/game" (controller:"game", action:"index")
+        "/games" (controller:"game", action:"index")
+        "/play/$id?(.$format)?" (controller:"game", action:"show")
         "500"(view:'/error')
         "404"(view:'/notFound')
     }

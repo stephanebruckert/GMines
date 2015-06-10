@@ -33,7 +33,7 @@ class GameController {
 
     @Transactional
     def stroke(Game game) {
-         if (game.player1 == session.nickname) {
+        if (game.player1 == session.nickname) {
             game.player1lastActivity = new Date()
         } else if (game.player2 == null) {
             game.player2 = session.nickname
