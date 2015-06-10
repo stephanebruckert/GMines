@@ -3,6 +3,8 @@
 # suggested that you use the "grails integrate-with --git" command
 # to generate your .gitignore file.
 
+.DS_Store
+
 # web application files
 /web-app/WEB-INF/classes
 
