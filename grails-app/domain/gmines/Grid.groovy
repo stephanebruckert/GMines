@@ -88,8 +88,10 @@ class Grid {
 				// mine
 				if (nickname.equals(game.player1)) {
 					cellz[x][y].isDiscovered = 1
+					game.player1minesFound++
 				} else {
 					cellz[x][y].isDiscovered = 0
+					game.player2minesFound++
 				}
 			} else {
 				// cell 1 2 3 4 5 6 7 or 8

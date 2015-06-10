@@ -14,8 +14,6 @@
                     url:"${g.createLink(controller:'game',action:'refresh', id:game.id)}",
                     dataType: 'text',
                     success: function(data) {
-                        $('#ajax').html(data + " " + i++ );
-
                         if (parseInt(data) != actionCount) {
                             location.reload();
                         }
@@ -41,9 +39,8 @@
                 <li><g:link class="create" action="create"><g:message code="default.new.label" args="[entityName]" /></g:link></li>
             </ul>
         </div>
-        <div id="ajax">init</div>
         <div id="show-game" class="content scaffold-show" role="main">
-            <h1>${game.player1} () vs ${game.player2} ()</h1>
+            <h1>${game.player1} (${game.player1minesFound}) vs ${game.player2} (${game.player2minesFound})</h1>
             <g:if test="${flash.message}">
             <div class="message" role="status">${flash.message}</div>
             </g:if>

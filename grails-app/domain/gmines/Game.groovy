@@ -9,6 +9,8 @@ class Game {
 	Date player2lastActivity
 	boolean player2shouldPlay = true
     int actionCount = -1
+    int player1minesFound = 0
+    int player2minesFound = 0
 
     static constraints = {
         grid display: false
