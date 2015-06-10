@@ -13,14 +13,15 @@ class Game {
     int player2minesFound = 0
 
     static constraints = {
-        grid display: false
-        grid nullable: true
-        player1 nullable: true
-        player2 nullable: true
+        grid display: false, nullable: true
+        actionCount display: false
+        player1 nullable: true, display: false
+        player2 nullable: true, display: false
         player1lastActivity display: false
-        player2lastActivity display: false
-        player2lastActivity nullable: true
+        player2lastActivity display: false, nullable: true
         player2shouldPlay display: false
+        player1minesFound display: false
+        player2minesFound display: false
     }
 
     void stroke(int x, int y, String nickname) {

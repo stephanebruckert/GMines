@@ -82,6 +82,7 @@ class Grid {
 			// action is relevant
 			if (!cellz[x][y].isMine && cellz[x][y].nbCellsAdjacent == 0) {
 				// cell 0
+				game.player2shouldPlay = !game.player2shouldPlay
 				unfoldGaps(x, y, cellz)
 				unfoldBorder(cellz)
 			} else if (cellz[x][y].isMine) {

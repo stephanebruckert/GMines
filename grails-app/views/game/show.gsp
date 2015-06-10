@@ -6,7 +6,6 @@
         <title><g:message code="default.show.label" args="[entityName]" /></title>
         <script>
           $(function() {
-            var i = 0;
             var actionCount = ${game.actionCount};
 
             function afficheConversation() {
@@ -40,7 +39,7 @@
             </ul>
         </div>
         <div id="show-game" class="content scaffold-show" role="main">
-            <h1>${game.player1} (${game.player1minesFound}) vs ${game.player2} (${game.player2minesFound})</h1>
+            <h1>${game.player1} (${game.player1minesFound}) vs. ${game.player2} (${game.player2minesFound})</h1>
             <g:if test="${flash.message}">
             <div class="message" role="status">${flash.message}</div>
             </g:if>
