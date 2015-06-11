@@ -42,11 +42,13 @@ class GameController {
 
     @Transactional
     def stroke(Game game) {
+        if (session.nickname == null) {
+            session.nickname = (session.id).substring(0, 5)
+        }
         if (game.player1 == session.nickname) {
             game.player1lastActivity = new Date()
         } else if (game.player2 == null) {
-            game.player2 = (session.id).substring(0, 5)
-            session.nickname = (session.id).substring(0, 5)
+            game.player2 = session.nickname
             game.player2lastActivity = new Date()
             game.actionCount++
         } else if (game.player2 == session.nickname) {

@@ -51,10 +51,19 @@
                         </g:if>
                         <g:else>
                             Player 2's turn
+                            <g:javascript>
+                            $( document ).ready(function() {
+                                 $("title").text("PLAYER 2's TURN !");
+                            });
+                           </g:javascript>
                         </g:else>
                     </g:if>
                     <g:elseif test="${!game.player2shouldPlay}">
-                        Player 1's turn
+                        <g:javascript>
+                            $( document ).ready(function() {
+                                 $("title").text("PLAYER 1's TURN !");
+                            });
+                        </g:javascript>
                     </g:elseif>
                 </g:if>
                 <g:elseif test="${game.winner == 1}">
