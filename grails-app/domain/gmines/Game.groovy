@@ -23,6 +23,7 @@ class Game {
         player2shouldPlay display: false
         player1minesFound display: false
         player2minesFound display: false
+        winner display: false
     }
 
     void stroke(int x, int y, String nickname) {

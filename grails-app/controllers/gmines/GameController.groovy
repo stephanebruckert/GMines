@@ -27,6 +27,15 @@ class GameController {
         render game.actionCount
     }
 
+    /**
+    def lookForGame() {
+        def results = Game.withCriteria {
+            like('title', '%Groovy%')
+        }
+        render 
+    }
+    */
+
     def create() {
         respond new Game(params)
     }
