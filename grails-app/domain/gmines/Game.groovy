@@ -11,6 +11,7 @@ class Game {
     int actionCount = -1
     int player1minesFound = 0
     int player2minesFound = 0
+    int winner = -1
 
     static constraints = {
         grid display: false, nullable: true
@@ -25,9 +26,11 @@ class Game {
     }
 
     void stroke(int x, int y, String nickname) {
-        if (sessionShouldPlay(nickname)) {
+        // if it's the player's turn and the game is not over yet
+        if (sessionShouldPlay(nickname) && winner < 0) {
         	if (grid.discover(x, y, nickname)) {
                 actionCount++;
+                winner = isThereWinnerNow()
             }
         }
     }
@@ -41,6 +44,19 @@ class Game {
             return true
         } else {
             return false
+        }
+    }
+
+    int isThereWinnerNow() {
+        if (player1minesFound >= 26) {
+            // player 1 won
+            return 0
+        } else if (player2minesFound >= 26) {
+            // player 2 won
+            return 1
+        } else {
+            // no winner yet
+            return -1
         }
     }
 }

@@ -43,6 +43,7 @@
             <g:if test="${flash.message}">
             <div class="message" role="status">${flash.message}</div>
             </g:if>
+            ${game.winner}
             <div id="board">
                 <div id="grid">
                     <g:each in="${cells}" var="row" status="rowcount">
