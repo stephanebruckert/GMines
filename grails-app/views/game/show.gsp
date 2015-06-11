@@ -43,7 +43,27 @@
             <g:if test="${flash.message}">
             <div class="message" role="status">${flash.message}</div>
             </g:if>
-            ${game.winner}
+            <div class="message"</div>
+                <g:if test="${game.winner == -1}">
+                    <g:if test="${game.player2shouldPlay}">
+                        <g:if test="${game.player2 == null}">
+                            Waiting for player 2
+                        </g:if>
+                        <g:else>
+                            Player 2's turn
+                        </g:else>
+                    </g:if>
+                    <g:elseif test="${!game.player2shouldPlay}">
+                        Player 1's turn
+                    </g:elseif>
+                </g:if>
+                <g:elseif test="${game.winner == 1}">
+                    Player 2 won!
+                </g:elseif>
+                <g:else>
+                    Player 1 won!
+                </g:else>
+            </div>
             <div id="board">
                 <div id="grid">
                     <g:each in="${cells}" var="row" status="rowcount">
