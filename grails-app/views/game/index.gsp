@@ -34,7 +34,7 @@
                     <th>Last activity</th>
                     <th>Status</th>
                   </tr>
-                  <g:each in="${gameList.reverse(true)}" var="game">
+                  <g:each in="${gameList}" var="game">
                     <tr>
                       <td><g:link action="show" id="${game.id}">${game.id}</g:link></td>
                       <td>${game.player1}</td>

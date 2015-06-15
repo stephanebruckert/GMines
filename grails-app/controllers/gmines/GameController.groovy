@@ -10,7 +10,7 @@ class GameController {
 
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
-        respond Game.list(params), model:[gameCount: Game.count()]
+        respond Game.list(params).reverse(), model:[gameCount: Game.count()]
     }
 
     def show(Game game) {
@@ -26,15 +26,6 @@ class GameController {
     def refresh(Game game) {
         render game.actionCount
     }
-
-    /**
-    def lookForGame() {
-        def results = Game.withCriteria {
-            like('title', '%Groovy%')
-        }
-        render 
-    }
-    */
 
     def create() {
         respond new Game(params)

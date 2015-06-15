@@ -59,6 +59,7 @@
                         </g:else>
                     </g:if>
                     <g:elseif test="${!game.player2shouldPlay}">
+                        Player 1's turn
                         <g:javascript>
                             $( document ).ready(function() {
                                  $("title").text("PLAYER 1's TURN !");
