@@ -4,29 +4,11 @@
         <meta name="layout" content="main">
         <g:set var="entityName" value="${message(code: 'game.label', default: 'Game')}" />
         <title><g:message code="default.show.label" args="[entityName]" /></title>
-        <script>
-          $(function() {
+        <meta name="isGame" content="true" />    
+        <script type="text/JavaScript">
             var actionCount = ${game.actionCount};
-
-            function refresh() {
-                $.ajax({
-                    url:"${g.createLink(controller:'game',action:'refresh', id:game.id)}",
-                    dataType: 'text',
-                    success: function(data) {
-                        if (parseInt(data) != actionCount) {
-                            location.reload();
-                        }
-                    },
-                    error: function(request, status, error) {
-
-                    },
-                    complete: function() {
-
-                    }
-                });
-            }
+            var link = "${g.createLink(controller:'game',action:'refresh', id:game.id)}";
             setInterval(refresh, 1000);
-          });
         </script>
     </head>
     <body>
@@ -41,8 +23,11 @@
         <div id="show-game" class="content scaffold-show" role="main">
             <h1>${game.player1} ${game.player1minesFound} – ${game.player2minesFound} ${game.player2}</h1>
             <g:if test="${flash.message}">
-            <div class="message" role="status">${flash.message}</div>
+                <div class="message" role="status">${flash.message}</div>
             </g:if>
+            <noscript>
+                <div class="message" role="status">Your browser does not support JavaScript, please refresh the game to get changes!</div>
+            </noscript>
             <div class="message"</div>
                 <g:if test="${game.winner == -1}">
                     <g:if test="${game.player2shouldPlay}">
