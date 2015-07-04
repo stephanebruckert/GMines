@@ -36,3 +36,5 @@
 /target
 /build
 /.gradle
+
+/grails-app/assets/libs/bower_components/
