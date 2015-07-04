@@ -1,0 +1,9 @@
+.alert.ng-enter {
+  -webkit-animation: 0.5s bounce;
+  animation: 0.5s bounce;
+}
+
+.alert.ng-leave {
+  -webkit-animation: 0.5s fadeOutDown;
+  animation: 0.5s fadeOutDown;
+}
