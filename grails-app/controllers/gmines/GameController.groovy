@@ -13,6 +13,13 @@ class GameController {
         respond Game.list(params).reverse(), model:[gameCount: Game.count()]
     }
 
+    def angular() {
+        render(contentType: "application/json") {
+            names = ["lucas", "Fred", "Mary"]
+            games = Game.list()
+        }
+    }
+
     def show(Game game) {
         request.withFormat {
             form multipartForm {

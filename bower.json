@@ -18,6 +18,7 @@
     "angular-ui-bootstrap-bower": "0.13.x",
     "ui-router": "0.2.x",
     "bootstrap": "3.3.x",
-    "animate.css": "3.3.x"
+    "animate.css": "3.3.x",
+    "ng-table": "0.5.4"
   }
 }

@@ -6,4 +6,20 @@
     <div class="row">
         <a ui-sref="login">Login as someone else</a>    
     </div>
+
+    <p><strong>Page:</strong> {{tableParams.page()}}
+
+    <p><strong>Count per page:</strong> {{tableParams.count()}}
+	<table ng-table="tableParams" class="table">        
+		<tr ng-repeat="game in vm.games">
+			<td data-title="'#'" sorting="'number'">
+                <a target="_blank" ng-href="{{game.id}}">{{ game.id }}</a>
+            </td>
+            <td data-title="'Player 1'">{{ game.player1 }}</td>
+            <td data-title="'Score 1'">{{ game.player1minesFound }}</td>
+            <td data-title="'Score 2'">{{ game.player2minesFound }}</td>
+            <td data-title="'Player 2'">{{ game.player2 }}</td>
+            <td data-title="'Last Activity'">{{ game.player1lastActivity }}</td>
+        </tr>
+    </table>
 </div>

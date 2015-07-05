@@ -1,4 +1,5 @@
 package gmines
+import grails.rest.*
 
 class Game {
 
