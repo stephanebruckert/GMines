@@ -13,13 +13,6 @@ class GameController {
         respond Game.list(params).reverse(), model:[gameCount: Game.count()]
     }
 
-    def angular() {
-        render(contentType: "application/json") {
-            names = ["lucas", "Fred", "Mary"]
-            games = Game.list()
-        }
-    }
-
     def show(Game game) {
         request.withFormat {
             form multipartForm {
@@ -57,8 +50,36 @@ class GameController {
         redirect action:"show", method:"GET", id:game.id
     }
 
-    @Transactional
-    def save(Game game) {
+    protected void notFound() {
+        request.withFormat {
+            form multipartForm {
+                flash.message = message(code: 'default.not.found.message', args: [message(code: 'game.label', default: 'Game'), params.id])
+                redirect action: "index", method: "GET"
+            }
+            '*'{ render status: NOT_FOUND }
+        }
+    }
+
+    def list() {
+        render(contentType: "application/json") {
+            games = Game.list()
+        }
+    }
+
+    def info(Game game) {
+        render(contentType: "application/json") {
+            p1 = game.player1
+            p2 = game.player2
+            who = game.player2shouldPlay
+            p1c = game.player1minesFound
+            p2c = game.player2minesFound
+            winner = game.winner
+            grid = game.grid.getDisplayableGrid()
+        }
+    }
+
+    def save() {
+        Game game = new Game()
         if (game == null) {
             transactionStatus.setRollbackOnly()
             notFound()
@@ -78,23 +99,8 @@ class GameController {
         game.grid.findAdjacentCell()
         game.save flush:true
 
-        request.withFormat {
-            form multipartForm {
-                flash.message = message(code: 'default.created.message', args: [message(code: 'game.label', default: 'Game'), game.id])
-                redirect game
-            }
-            '*' { respond game, [status: CREATED] }
+        render(contentType: "application/json") {
+            game = game
         }
     }
-
-    protected void notFound() {
-        request.withFormat {
-            form multipartForm {
-                flash.message = message(code: 'default.not.found.message', args: [message(code: 'game.label', default: 'Game'), params.id])
-                redirect action: "index", method: "GET"
-            }
-            '*'{ render status: NOT_FOUND }
-        }
-    }
-
 }

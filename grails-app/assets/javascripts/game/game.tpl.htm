@@ -1,0 +1,18 @@
+<div>
+	<div class="row">
+        <h1>{{ vm.player1 }} vs {{ vm.player2 }}</h1>
+    </div>
+    <div id="grid">
+		<span ng-repeat="row in vm.grid">
+			<div class="square" ng-repeat="class in row track by $index">
+				<div class="content">
+			        <div class="table">
+			            <div class="table-cell {{ class }}">
+			                {{ class }}
+			            </div>
+			        </div>
+			    </div>
+			</div>
+		</span>
+	</div>
+</div>

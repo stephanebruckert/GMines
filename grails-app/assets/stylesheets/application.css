@@ -11,5 +11,6 @@
 *= require bower_components/animate.css/animate.css
 *= require app
 *= require app-animations
+*= require game
 *= require_self
 */

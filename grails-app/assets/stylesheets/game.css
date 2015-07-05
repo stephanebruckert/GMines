@@ -1,24 +1,31 @@
 #grid {
-	max-width: 500px;
-	margin-left: auto;
-	margin-right: auto;
-	display:table;
-	width:100%;
-	height:100%;
+	max-width: 600px;
 }
 
-input[type="image"] {
-	display:table-cell;
-	float:left;
-	position: relative;
-	width: 6.25%;
-	background-position:center center;
-	background-repeat:no-repeat;
-	background-size:cover;
-	padding: 0px;
-	border: 0;
+.square {
+    float:left;
+    position: relative;
+    width: 5.8%;
+    margin:0.20%;
+    padding-bottom : 5.8%; /* = width for a 1:1 aspect ratio */
+    overflow:hidden;
 }
 
-.footer {
-	margin-top: 0px;
+.content {
+    position:absolute;
+    height:100%; /* = 100% - 2*5% padding */
+    width:100%; /* = 100% - 2*5% padding */    
+}
+.table{
+    display:table;
+    width:100%;
+    height:100%;
+}
+.table-cell{
+    display:table-cell;
+    vertical-align:middle;
+}
+.square .o {
+    background-color:rgb(200,200,200);
+
 }

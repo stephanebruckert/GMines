@@ -197,15 +197,18 @@ class Grid {
 			for (int y = 0; y < edgeSize; y++) {
 				cell = cellz[x][y]
 				if (cell.isDiscovered == -1) {
-					icons[x][y] = "game/bombHover.png"
+					// bomb hover
+					icons[x][y] = "o"
 				} else if (cell.isMine) {
 					if (cell.isDiscovered == 1) {
-						icons[x][y] = "game/hisMine.png"
+						// his mine
+						icons[x][y] = "h"
 					} else {
-						icons[x][y] = "game/myMine.png"
+						// my mine
+						icons[x][y] = "m"
 					}
 				} else {
-					icons[x][y] = "game/" + cell.nbCellsAdjacent + ".png"
+					icons[x][y] = "n" + cell.nbCellsAdjacent
 				}
 			}
 		}
@@ -218,11 +221,11 @@ class Grid {
 		String str;
 		if (lastPlayer1 != null) {
 			str = icons[(int)lastPlayer1.x][(int)lastPlayer1.y]
-			icons[(int)lastPlayer1.x][(int)lastPlayer1.y] = str.substring(0, str.lastIndexOf('.')) + "Blue.png"
+			icons[(int)lastPlayer1.x][(int)lastPlayer1.y] += "b"
 		}
 		if (lastPlayer2 != null) {
 			str = icons[(int)lastPlayer2.x][(int)lastPlayer2.y]
-			icons[(int)lastPlayer2.x][(int)lastPlayer2.y] = str.substring(0, str.lastIndexOf('.')) + "Red.png"
+			icons[(int)lastPlayer2.x][(int)lastPlayer2.y] += "r"
 		}
 		return icons
 	}

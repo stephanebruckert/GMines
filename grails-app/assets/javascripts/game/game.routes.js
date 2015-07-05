@@ -2,18 +2,18 @@
 'use strict';
 
 angular
-    .module('gmines.report')
+    .module('gmines.game')
     .config(configureRoutes);
 
 function configureRoutes($stateProvider, roles) {
     $stateProvider
-        .state('report', {
-            url: '/report',
-            controller: 'ReportController',
+        .state('game', {
+            url: '/game/:gameId',
+            controller: 'gameController',
             controllerAs: 'vm',
-            templateUrl: '/report/report.htm',
+            templateUrl: '/game/game.htm',
             data: {
                 requiredRoles: [roles.USER]
             }
-        })
+        });
 }

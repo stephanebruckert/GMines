@@ -1,19 +1,16 @@
 <div>
     <div class="row">
-        <span>New Report for {{vm.fullName}}</span>
-    </div>
-    
-    <div class="row">
-        <a ui-sref="login">Login as someone else</a>    
+        <span>Connected as {{vm.fullName}}</span>
+        <a class="btn btn-default btn-xs" ui-sref="login" role="button">Login as someone else</a>
+        <form ng-submit="newGame()">
+            <button class="btn btn-default" type="submit">Send</button>
+        </form>
     </div>
 
-    <p><strong>Page:</strong> {{tableParams.page()}}
-
-    <p><strong>Count per page:</strong> {{tableParams.count()}}
 	<table ng-table="tableParams" class="table">        
 		<tr ng-repeat="game in vm.games">
 			<td data-title="'#'" sorting="'number'">
-                <a target="_blank" ng-href="{{game.id}}">{{ game.id }}</a>
+                <a ui-sref="game({gameId: game.id})">{{ game.id }}</a>
             </td>
             <td data-title="'Player 1'">{{ game.player1 }}</td>
             <td data-title="'Score 1'">{{ game.player1minesFound }}</td>
