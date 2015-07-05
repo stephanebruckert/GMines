@@ -92,7 +92,7 @@ class GameController {
             return
         }
 
-        game.player1 = session.nickname
+        game.player1 = request.JSON.user
         game.grid = new Grid()
         game.grid.init()
         game.grid.fillGrid()

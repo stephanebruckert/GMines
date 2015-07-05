@@ -30,8 +30,7 @@ function ReportController(userData, $http, $scope, ngTableParams) {
 	}
 
     $scope.newGame = function() {
-        $http.post("/game/save").success( function( data ) {
-        	$scope.tableParams.total(data.length);
+        $http.post("/game/save", {user:vm.fullName}).success( function( data ) {
             list();
         })
     }
