@@ -1,9 +1,9 @@
 <div>
     <div class="row">
-        <span>Connected as {{vm.fullName}}</span>
-        <a class="btn btn-default btn-xs" ui-sref="login" role="button">Login as someone else</a>
+        <span class="pull-right">Connected as {{vm.fullName}} <a class="btn btn-default btn-xs" ui-sref="login" role="button">Disconnect</a></span>
+        
         <form ng-submit="newGame()">
-            <button class="btn btn-default" type="submit">Send</button>
+            <button class="btn btn-default" type="submit">New game</button>
         </form>
     </div>
 
@@ -15,7 +15,14 @@
             <td data-title="'Player 1'">{{ game.player1 }}</td>
             <td data-title="'Score 1'">{{ game.player1minesFound }}</td>
             <td data-title="'Score 2'">{{ game.player2minesFound }}</td>
-            <td data-title="'Player 2'">{{ game.player2 }}</td>
+            <td data-title="'Player 2'">
+                <div ng-show="game.player2">
+                    {{ game.player2 }}
+                </div>
+                <div ng-hide="game.player2">
+                    <a class="btn btn-default btn-xs" ui-sref="login" role="button">play as player 2</a>
+                </div>
+            </td>
             <td data-title="'Last Activity'">{{ game.player1lastActivity }}</td>
         </tr>
     </table>

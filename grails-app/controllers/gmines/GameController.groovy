@@ -6,7 +6,7 @@ import grails.transaction.Transactional
 @Transactional(readOnly = true)
 class GameController {
 
-    static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
+    static allowedMethods = [save: "POST", stroke: "POST", update: "PUT", delete: "DELETE"]
 
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
@@ -31,23 +31,32 @@ class GameController {
         respond new Game(params)
     }
 
-    @Transactional
-    def stroke(Game game) {
-        if (session.nickname == null) {
-            session.nickname = (session.id).substring(0, 5)
+    def stroke() {
+        Game game = Game.get(request.JSON.gameId)
+        if (request.JSON.user == null) {
+            request.JSON.user = (session.id).substring(0, 5)
         }
-        if (game.player1 == session.nickname) {
+        if (game.player1 == request.JSON.user) {
             game.player1lastActivity = new Date()
         } else if (game.player2 == null) {
-            game.player2 = session.nickname
+            game.player2 = request.JSON.user
             game.player2lastActivity = new Date()
             game.actionCount++
-        } else if (game.player2 == session.nickname) {
+        } else if (game.player2 == request.JSON.user) {
             game.player2lastActivity = new Date()
         }
-        game.stroke(params.int('x'), params.int('y'), session.nickname)
+        game.stroke(request.JSON.num, request.JSON.user)
         game.save(flush:true)
-        redirect action:"show", method:"GET", id:game.id
+        
+        render(contentType: "application/json") {
+            p1 = game.player1
+            p2 = game.player2
+            who = game.player2shouldPlay
+            p1c = game.player1minesFound
+            p2c = game.player2minesFound
+            winner = game.winner
+            grid = game.grid.getDisplayableGrid()
+        }
     }
 
     protected void notFound() {

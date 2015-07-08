@@ -189,7 +189,7 @@ class Grid {
 		}
 	}
 
-	public String[][] getDisplayableGrid() {
+	public String[] getDisplayableGrid() {
 		String[][] icons = new String[edgeSize][edgeSize]
 		Cell[][] cellz = cells.collate(edgeSize)
 		Cell cell
@@ -212,8 +212,17 @@ class Grid {
 				}
 			}
 		}
+		return to1D(applyLastCoordinates(icons))
+	}
 
-		return applyLastCoordinates(icons)
+	public String[] to1D(String[][] icons2D) {
+		String[] icons1D = new String[edgeSize * edgeSize]
+		for (int x = 0; x < edgeSize ; x++) {
+			for (int y = 0; y < edgeSize; y++) {
+				icons1D[edgeSize * x + y] = icons2D[x][y]
+			}
+		}
+		return icons1D
 	}
 
 	private String[][] applyLastCoordinates(String[][] icons) {
@@ -221,11 +230,11 @@ class Grid {
 		String str;
 		if (lastPlayer1 != null) {
 			str = icons[(int)lastPlayer1.x][(int)lastPlayer1.y]
-			icons[(int)lastPlayer1.x][(int)lastPlayer1.y] += "b"
+			icons[(int)lastPlayer1.x][(int)lastPlayer1.y] += " b"
 		}
 		if (lastPlayer2 != null) {
 			str = icons[(int)lastPlayer2.x][(int)lastPlayer2.y]
-			icons[(int)lastPlayer2.x][(int)lastPlayer2.y] += "r"
+			icons[(int)lastPlayer2.x][(int)lastPlayer2.y] += " r"
 		}
 		return icons
 	}

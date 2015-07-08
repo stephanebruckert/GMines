@@ -2,7 +2,7 @@
 	max-width: 600px;
 }
 
-.square {
+#grid .square {
     float:left;
     position: relative;
     width: 5.8%;
@@ -11,21 +11,87 @@
     overflow:hidden;
 }
 
-.content {
+#grid .content {
     position:absolute;
     height:100%; /* = 100% - 2*5% padding */
     width:100%; /* = 100% - 2*5% padding */    
 }
-.table{
+
+#grid .table{
     display:table;
     width:100%;
     height:100%;
 }
-.table-cell{
+
+#grid form {
+    display:table;
+    width:100%;
+    height:100%;
+
+}
+
+#grid .table-cell {
     display:table-cell;
     vertical-align:middle;
+    width:100%;
+    height:100%;
+    border: 0px;
+    padding:0px;
+    font-weight: 900;
 }
-.square .o {
-    background-color:rgb(200,200,200);
 
+.o {
+    background-color: rgb(200,200,200);
+}
+
+.h {
+    background-color: #275B87;
+}
+
+.m {
+    background-color: #E43F4A;
+}
+
+.b {
+    border: 3px solid #275B87;
+}
+
+.r {
+    border: 3px solid #E43F4A;
+}
+
+.n0,.n1,.n2,.n3,.n4,.n5,.n6,.n7,.n8 { 
+    background-color: rgb(230,230,230); 
+}
+
+.table-cell.n1:after {
+    content: "1";
+}
+
+.table-cell.n2:after {
+    content: "2";
+}
+
+.table-cell.n3:after {
+    content: "3";
+}
+
+.table-cell.n4:after {
+    content: "4";
+}
+
+.table-cell.n5:after {
+    content: "5";
+}
+
+.table-cell.n6:after {
+    content: "6";
+}
+
+.table-cell.n7:after {
+    content: "7";
+}
+
+.table-cell.n8:after {
+    content: "8";
 }
