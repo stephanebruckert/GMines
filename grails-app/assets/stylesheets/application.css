@@ -8,6 +8,8 @@
 * compiled file, but it's generally better to create a new file per style scope.
 *
 *= require bower_components/bootstrap/dist/css/bootstrap.css
+*= require bower_components/fontawesome/css/font-awesome.min.css
+*= require bower_components/rdash-ui/dist/css/rdash.min.css
 *= require bower_components/animate.css/animate.css
 *= require app
 *= require app-animations

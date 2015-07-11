@@ -1,9 +1,9 @@
 <div>
 	<div class="row">
-        <h1>{{ vm.p1 }} vs {{ vm.p2 }}</h1>
+        <h1>{{ vm.data.p1 }} vs {{ vm.data.p2 }}</h1>
     </div>
     <div id="grid">
-		<div class="square" ng-repeat="cell in vm.grid track by $index">
+		<div class="square" ng-repeat="cell in vm.data.grid track by $index">
 			<div class="content">
 		        <div class="table {{ cell }}">
 	                <form ng-submit="play($index)">

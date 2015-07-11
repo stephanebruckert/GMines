@@ -16,5 +16,3 @@ function configureRoutes($stateProvider, $urlRouterProvider) {
             templateUrl: '/session/login.htm'
         });
 }
-
-

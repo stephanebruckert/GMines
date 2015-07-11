@@ -7,7 +7,9 @@
 //
 //= require bower_components/angular/angular
 //= require bower_components/angular-animate/angular-animate
+//= require bower_components/angular-cookies/angular-cookies
 //= require bower_components/angular-ui-bootstrap-bower/ui-bootstrap-tpls
 //= require bower_components/ui-router/release/angular-ui-router
 //= require bower_components/ng-table/dist/ng-table
 //= require app.module
+//= require dashboard.min
