@@ -2,7 +2,6 @@
 body,
 input, select, textarea {
     font-family: "HelveticaNeue-Light", "Helvetica Neue Light", "Helvetica Neue", Helvetica, Arial, "Lucida Grande", sans-serif;
-    padding-bottom: 20px;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -399,7 +398,7 @@ tr>td:last-child, tr>th:last-child {
 td, th {
     line-height: 1.5em;
     padding: 0.5em 0.6em;
-    text-align: center;
+    text-align: left;
     vertical-align: top;
 }
 

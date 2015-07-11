@@ -1,0 +1,16 @@
+<div>
+	<div class="row">
+        <h1>{{ vm.data.p1 }} vs {{ vm.data.p2 }}</h1>
+    </div>
+    <div id="grid">
+		<div class="square" ng-repeat="cell in vm.data.grid track by $index">
+			<div class="content">
+		        <div class="table {{ cell }}">
+	                <form ng-submit="play($index)">
+					    <button type="submit" class="table-cell {{ cell }}"></button>
+					</form>
+		        </div>
+		    </div>
+		</div>
+	</div>
+</div>

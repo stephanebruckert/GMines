@@ -1,4 +1,5 @@
 package gmines
+import grails.rest.*
 
 class Game {
 
@@ -26,7 +27,9 @@ class Game {
         winner display: false
     }
 
-    void stroke(int x, int y, String nickname) {
+    void stroke(int num, String nickname) {
+        int x = num / 16
+        int y = num % 16
         // if it's the player's turn and the game is not over yet
         if (sessionShouldPlay(nickname) && winner < 0) {
         	if (grid.discover(x, y, nickname)) {

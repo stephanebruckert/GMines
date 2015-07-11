@@ -1,123 +1,128 @@
 <!doctype html>
-<html>
-    <head>
-        <meta name="layout" content="main"/>
-        <title>Welcome to Grails</title>
-        <style type="text/css" media="screen">
-            #status {
-                background-color: #eee;
-                border: .2em solid #fff;
-                margin: 2em 2em 1em;
-                padding: 1em;
-                width: 12em;
-                float: left;
-                -moz-box-shadow: 0px 0px 1.25em #ccc;
-                -webkit-box-shadow: 0px 0px 1.25em #ccc;
-                box-shadow: 0px 0px 1.25em #ccc;
-                -moz-border-radius: 0.6em;
-                -webkit-border-radius: 0.6em;
-                border-radius: 0.6em;
-            }
+<html lang="en" ng-app="gmines" class="no-js">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <title>GMines</title>
+  <asset:stylesheet href="application.css"/>
+</head>
+<body ng-controller="MasterCtrl">
+  <div id="page-wrapper" ng-class="{'open': toggle}" ng-cloak>
 
-            #status ul {
-                font-size: 0.9em;
-                list-style-type: none;
-                margin-bottom: 0.6em;
-                padding: 0;
-            }
-
-            #status li {
-                line-height: 1.3;
-            }
-
-            #status h1 {
-                text-transform: uppercase;
-                font-size: 1.1em;
-                margin: 0 0 0.3em;
-            }
-
-            #page-body {
-                margin: 2em 1em 1.25em 18em;
-            }
-
-            h2 {
-                margin-top: 1em;
-                margin-bottom: 0.3em;
-                font-size: 1em;
-            }
-
-            p {
-                line-height: 1.5;
-                margin: 0.25em 0;
-            }
-
-            #controller-list ul {
-                list-style-position: inside;
-            }
-
-            #controller-list li {
-                line-height: 1.3;
-                list-style-position: inside;
-                margin: 0.25em 0;
-            }
-
-            @media screen and (max-width: 480px) {
-                #status {
-                    display: none;
-                }
-
-                #page-body {
-                    margin: 0 1em 1em;
-                }
-
-                #page-body h1 {
-                    margin-top: 0;
-                }
-            }
-        </style>
-    </head>
-    <body>
-        <a href="#page-body" class="skip"><g:message code="default.link.skip.label" default="Skip to content&hellip;"/></a>
-        <div id="status" role="complementary">
-            <h1>Application Status</h1>
-            <ul>
-                <li>Environment: ${grails.util.Environment.current.name}</li>
-                <li>App profile: ${grailsApplication.config.grails?.profile}</li>
-                <li>App version: <g:meta name="info.app.version"/></li>
-                <li>Grails version: <g:meta name="info.app.grailsVersion"/></li>
-                <li>Groovy version: ${GroovySystem.getVersion()}</li>
-                <li>JVM version: ${System.getProperty('java.version')}</li>
-                <li>Reloading active: ${grails.util.Environment.reloadingAgentEnabled}</li>
-            </ul>
-            <h1>Artefacts</h1>
-            <ul>
-                <li>Controllers: ${grailsApplication.controllerClasses.size()}</li>
-                <li>Domains: ${grailsApplication.domainClasses.size()}</li>
-                <li>Services: ${grailsApplication.serviceClasses.size()}</li>
-                <li>Tag Libraries: ${grailsApplication.tagLibClasses.size()}</li>                    
-            </ul>
-            <h1>Installed Plugins</h1>
-            <ul>
-                <g:each var="plugin" in="${applicationContext.getBean('pluginManager').allPlugins}">
-                    <li>${plugin.name} - ${plugin.version}</li>
-                </g:each>
-            </ul>
+    <!-- Sidebar -->
+    <div id="sidebar-wrapper">
+      <ul class="sidebar">
+        <li class="sidebar-main">
+          <a ng-click="toggleSidebar()">
+            Dashboard
+            <span class="menu-icon glyphicon glyphicon-transfer"></span>
+          </a>
+        </li>
+        <li class="sidebar-title"><span>NAVIGATION</span></li>
+        <li class="sidebar-list">
+          <a href="#">Dashboard <span class="menu-icon fa fa-tachometer"></span></a>
+        </li>
+        <li class="sidebar-list">
+          <a href="#/tables">Tables <span class="menu-icon fa fa-table"></span></a>
+        </li>
+      </ul>
+      <div class="sidebar-footer">
+        <div class="col-xs-4">
+          <a href="https://github.com/rdash/rdash-angular" target="_blank">
+            Github
+          </a>
         </div>
-        <div id="page-body" role="main">
-            <h1>Welcome to Grails</h1>
-            <p>Congratulations, you have successfully started your first Grails application! At the moment
-               this is the default page, feel free to modify it to either redirect to a controller or display whatever
-               content you may choose. Below is a list of controllers that are currently deployed in this application,
-               click on each to execute its default action:</p>
+        <div class="col-xs-4">
+          <a href="https://github.com/rdash/rdash-angular/README.md" target="_blank">
+            About
+          </a>
+        </div>
+        <div class="col-xs-4">
+          <a href="#">
+            Support
+          </a>
+        </div>
+      </div>
+    </div>
+    <!-- End Sidebar -->
 
-            <div id="controller-list" role="navigation">
-                <h2>Available Controllers:</h2>
-                <ul>
-                    <g:each var="c" in="${grailsApplication.controllerClasses.sort { it.fullName } }">
-                        <li class="controller"><g:link controller="${c.logicalPropertyName}">${c.fullName}</g:link></li>
-                    </g:each>
+    <div id="content-wrapper">
+      <div class="page-content">
+
+        <!-- Header Bar -->
+        <div class="row header">
+          <div class="col-xs-12">
+            <div class="user pull-right">
+              <div class="item dropdown">
+                <a href="#" class="dropdown-toggle">
+                  <img src="../assets/avatar.jpg">
+                </a>
+                <ul class="dropdown-menu dropdown-menu-right">
+                  <li class="dropdown-header">
+                    Joe Bloggs
+                  </li>
+                  <li class="divider"></li>
+                  <li class="link">
+                    <a href="#">
+                      Profile
+                    </a>
+                  </li>
+                  <li class="link">
+                    <a href="#">
+                      Menu Item
+                    </a>
+                  </li>
+                  <li class="link">
+                    <a href="#">
+                      Menu Item
+                    </a>
+                  </li>
+                  <li class="divider"></li>
+                  <li class="link">
+                    <a href="#">
+                      Logout
+                    </a>
+                  </li>
                 </ul>
+              </div>
+              <div class="item dropdown">
+               <a href="#" class="dropdown-toggle">
+                  <i class="fa fa-bell-o"></i>
+                </a>
+                <ul class="dropdown-menu dropdown-menu-right">
+                  <li class="dropdown-header">
+                    Notifications
+                  </li>
+                  <li class="divider"></li>
+                  <li>
+                    <a href="#">Server Down!</a>
+                  </li>
+                </ul>
+              </div>
             </div>
+            <div class="meta">
+              <div class="page">
+                Dashboard
+              </div>
+              <div class="breadcrumb-links">
+                Home / Dashboard
+              </div>
+            </div>
+          </div>
         </div>
-    </body>
+        <!-- End Header Bar -->
+
+        <!-- Main Content -->
+        <div ng-controller="LoginController">
+          <div ui-view class="container">
+            Loading...
+          </div>
+        </div>
+        <asset:javascript src="application.js"/>
+      </div><!-- End Page Content -->
+    </div><!-- End Content Wrapper -->
+  </div><!-- End Page Wrapper -->
+</body>
 </html>
