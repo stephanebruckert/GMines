@@ -16,16 +16,16 @@
       <ul class="sidebar">
         <li class="sidebar-main">
           <a ng-click="toggleSidebar()">
-            Dashboard
+            GMines
             <span class="menu-icon glyphicon glyphicon-transfer"></span>
           </a>
         </li>
         <li class="sidebar-title"><span>NAVIGATION</span></li>
         <li class="sidebar-list">
-          <a href="#">Dashboard <span class="menu-icon fa fa-tachometer"></span></a>
+          <a href="#/">List <span class="menu-icon fa fa-tachometer"></span></a>
         </li>
         <li class="sidebar-list">
-          <a href="#/tables">Tables <span class="menu-icon fa fa-table"></span></a>
+          <a href="#/report">Games <span class="menu-icon fa fa-table"></span></a>
         </li>
       </ul>
       <div class="sidebar-footer">
@@ -102,6 +102,14 @@
                 </ul>
               </div>
             </div>
+            <div class="meta pull-right" ng-show="selected.data">
+              <div class="page">
+                Connected as {{ selected.data }}
+              </div>
+              <div class="breadcrumb-links">
+                  <a role="button" ng-click="doLogout()">Disconnect</a>
+              </div>
+            </div>
             <div class="meta">
               <div class="page">
                 Dashboard
@@ -113,10 +121,9 @@
           </div>
         </div>
         <!-- End Header Bar -->
-
         <!-- Main Content -->
         <div ng-controller="LoginController">
-          <div ui-view class="container">
+          <div ui-view>
             Loading...
           </div>
         </div>

@@ -6,7 +6,6 @@ angular.module('gmines.session')
 
 function LoginController($state, profileService) {
     var vm = this;
-
     vm.clearError = clearError;
     vm.doLogin = doLogin;
     vm.error = '';

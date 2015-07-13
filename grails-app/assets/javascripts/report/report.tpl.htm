@@ -1,29 +1,75 @@
-<div>
-    <div class="row">
-        <span class="pull-right">Connected as {{vm.fullName}} <a class="btn btn-default btn-xs" ui-sref="login" role="button">Disconnect</a></span>
-        
-        <form ng-submit="newGame()">
-            <button class="btn btn-default" type="submit">New game</button>
-        </form>
+<div class=row>
+    <div class=col-lg-6>
+        <rd-widget>
+            <rd-widget-header icon=fa-tasks title=Games>
+            <form ng-submit="newGame()">
+                <button class="btn btn-default" type="submit">New</button>
+            </form>
+            </rd-widget-header>
+            <rd-widget-body classes="medium no-padding">
+                <div class=table-responsive>
+                    <table ng-table="tableParams" class="table">        
+                        <tr ng-repeat="game in vm.games">
+                            <td data-title="'#'" sorting="'player1lastActivity'">
+                                <a ui-sref="game({gameId: game.id})">{{ game.id }}</a>
+                            </td>
+                            <td data-title="'Player 1'">{{ game.player1 }}</td>
+                            <td data-title="">{{ game.player1minesFound }}</td>
+                            <td data-title="">{{ game.player2minesFound }}</td>
+                            <td data-title="'Player 2'">
+                                <div ng-show="game.player2">
+                                    {{ game.player2 }}
+                                </div>
+                                <div ng-hide="game.player2">
+                                    <a class="btn btn-default btn-xs" ui-sref="login" role="button">play as player 2</a>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </rd-widget-body>
+        </rd-widget>
     </div>
-
-	<table ng-table="tableParams" class="table">        
-		<tr ng-repeat="game in vm.games">
-			<td data-title="'#'" sorting="'number'">
-                <a ui-sref="game({gameId: game.id})">{{ game.id }}</a>
-            </td>
-            <td data-title="'Player 1'">{{ game.player1 }}</td>
-            <td data-title="'Score 1'">{{ game.player1minesFound }}</td>
-            <td data-title="'Score 2'">{{ game.player2minesFound }}</td>
-            <td data-title="'Player 2'">
-                <div ng-show="game.player2">
-                    {{ game.player2 }}
+    <div class=col-lg-6>
+        <rd-widget>
+            <rd-widget-header icon=fa-users title=Users>
+                <input type=text placeholder=Search class="form-control input-sm">
+            </rd-widget-header>
+            <rd-widget-body classes="medium no-padding">
+                <div class=table-responsive>
+                    <table class=table>
+                        <thead>
+                            <tr>
+                                <th class=text-center>ID</th>
+                                <th>Username</th>
+                                <th>Role</th>
+                                <th>Account</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class=text-center>1</td>
+                                <td>Joe Bloggs</td>
+                                <td>Super Admin</td>
+                                <td>AZ23045</td>
+                            </tr>
+                            <tr>
+                                <td class=text-center>2</td>
+                                <td>Timothy Hernandez</td>
+                                <td>Admin</td>
+                                <td>AU24783</td>
+                            </tr>
+                            <tr>
+                                <td class=text-center>3</td>
+                                <td>Joe Bickham</td>
+                                <td>User</td>
+                                <td>AM23781</td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
-                <div ng-hide="game.player2">
-                    <a class="btn btn-default btn-xs" ui-sref="login" role="button">play as player 2</a>
-                </div>
-            </td>
-            <td data-title="'Last Activity'">{{ game.player1lastActivity }}</td>
-        </tr>
-    </table>
+            </rd-widget-body>
+            <rd-widget></rd-widget>
+        </rd-widget>
+    </div>
 </div>

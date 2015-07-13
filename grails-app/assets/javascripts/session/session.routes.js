@@ -10,7 +10,7 @@ function configureRoutes($stateProvider, $urlRouterProvider) {
 
     $stateProvider
         .state('login', {
-            url: '/login',
+            url: '/',
             controller: 'LoginController',
             controllerAs: 'vm',
             templateUrl: '/session/login.htm'

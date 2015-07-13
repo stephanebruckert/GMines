@@ -24,16 +24,16 @@ function profileServiceFactory($q, roles, userData, $http) {
 
     return profileService;
 
-//    function retrieve(userId, password) {
-//        
-//        function extractDataFromResult(result) {
-//            userData.populate(userId, password, result.data.fullName, result.data.roles);
-//            
-//            return userData;
-//        }
-//        
-//        return $http.get('/profiles/' + userId).then(extractDataFromResult);
-//    }
+    //    function retrieve(userId, password) {
+    //        
+    //        function extractDataFromResult(result) {
+    //            userData.populate(userId, password, result.data.fullName, result.data.roles);
+    //            
+    //            return userData;
+    //        }
+    //        
+    //        return $http.get('/profiles/' + userId).then(extractDataFromResult);
+    //    }
 
     function retrieve(userId, password) {
         var deferred = $q.defer();
