@@ -5,11 +5,11 @@
 // You're free to add application-wide JavaScript to this file, but it's generally better 
 // to create separate JavaScript files as needed.
 //
-//= require bower/angular/angular
-//= require bower/angular-animate/angular-animate
-//= require bower/angular-cookies/angular-cookies
-//= require bower/angular-ui-bootstrap-bower/ui-bootstrap-tpls
-//= require bower/ui-router/release/angular-ui-router
-//= require bower/ng-table/dist/ng-table
+//= require bower_components/angular/angular
+//= require bower_components/angular-animate/angular-animate
+//= require bower_components/angular-cookies/angular-cookies
+//= require bower_components/angular-ui-bootstrap-bower/ui-bootstrap-tpls
+//= require bower_components/ui-router/release/angular-ui-router
+//= require bower_components/ng-table/dist/ng-table
 //= require app.module
 //= require dashboard.min

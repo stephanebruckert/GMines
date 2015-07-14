@@ -17,7 +17,6 @@
         "angular-animate": "1.3.x",
         "angular-ui-bootstrap-bower": "0.13.x",
         "ui-router": "0.2.x",
-        "bootstrap": "3.3.x",
         "animate.css": "3.3.x",
         "ng-table": "0.5.4",
         "fontawesome": "~4.3.0",
@@ -34,6 +33,6 @@
                 "bower_components/bootstrap/dist/**"
             ]
         },
-        "ignore": ["jquery"]
+        "ignore": ["jquery", "outro.js", "intro.js"]
     }
 }
