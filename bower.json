@@ -29,6 +29,6 @@
     },
     "install": {
         "path": "grails-app/assets/libs/bower_components",
-        "ignore": ["jquery"]
+        "ignore": ["bower_components/jquery"]
     }
 }
