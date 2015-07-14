@@ -38,7 +38,7 @@ ext {
     jasmineDependencies = ['karma', 'karma-jasmine@2_0', 'karma-phantomjs-launcher', 'phantomjs']
     bowerInstallerExec = file('node_modules/bower-installer/bower-installer')
     bowerExec = file('node_modules/bower-installer/node_modules/bower/bin/bower')
-    assetLibsDir = file('grails-app/assets/libs/bower_components')
+    assetLibsDir = file('grails-app/assets/libs/bower')
 }
 
 assets {
