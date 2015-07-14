@@ -45,7 +45,17 @@
 }
 
 .h {
-    background-color: #275B87;
+    background-color:#275B87;
+    position:relative;
+}
+.h:before, .m:before {
+    position:absolute;
+    font-family: FontAwesome;
+    top:4px;
+    left:8px;
+    content: "\f1e2";
+    color: rgb(200,200,200);
+    font-size: 18px;
 }
 
 .m {
@@ -53,11 +63,11 @@
 }
 
 .b {
-    border: 3px solid #275B87;
+    border: 2px dashed #275B87;
 }
 
 .r {
-    border: 3px solid #E43F4A;
+    border: 2px dashed #E43F4A;
 }
 
 .n0,.n1,.n2,.n3,.n4,.n5,.n6,.n7,.n8 { 

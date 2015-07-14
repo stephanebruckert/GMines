@@ -22,25 +22,45 @@
         </li>
         <li class="sidebar-title"><span>NAVIGATION</span></li>
         <li class="sidebar-list">
-          <a href="#/">List <span class="menu-icon fa fa-tachometer"></span></a>
+          <a href="#/">Home <span class="menu-icon fa fa-home"></span></a>
         </li>
         <li class="sidebar-list">
-          <a href="#/report">Games <span class="menu-icon fa fa-table"></span></a>
+          <a href="#/report">Lobby <span class="menu-icon fa fa-list"></span></a>
+        </li>
+        <li class="sidebar-list">
+          <a href="#/report">Stats <span class="menu-icon fa fa-tachometer"></span></a>
+        </li>
+        <li class="sidebar-title"><span>Playing now</span></li>
+        <li class="sidebar-list">
+          <a href="#/game/1">Fred (5 - 8)<span class="menu-icon fa fa-table"></span></a>
+        </li>
+        <li class="sidebar-list">
+          <a href="#/game/1">Fred (5 - 8)<span class="menu-icon fa fa-table"></span></a>
+        </li>
+        <li class="sidebar-list">
+          <a href="#/game/1">Fred (5 - 8)<span class="menu-icon fa fa-table"></span></a>
+        </li>
+        <li class="sidebar-list">
+          <a href="#/game/1">Fred (5 - 8)<span class="menu-icon fa fa-table"></span></a>
+        </li>
+        <li class="sidebar-title"><span>GAMES OVER</span></li>
+        <li class="sidebar-list">
+          <a href="#/game/2">Jessica (26 - 8)<span class="menu-icon fa fa-table"></span></a>
         </li>
       </ul>
       <div class="sidebar-footer">
         <div class="col-xs-4">
-          <a href="https://github.com/rdash/rdash-angular" target="_blank">
+          <a href="https://github.com/stephanebruckert/GMines/" target="_blank">
             Github
           </a>
         </div>
         <div class="col-xs-4">
-          <a href="https://github.com/rdash/rdash-angular/README.md" target="_blank">
+          <a href="https://github.com/stephanebruckert/GMines/README.md" target="_blank">
             About
           </a>
         </div>
         <div class="col-xs-4">
-          <a href="#">
+          <a href="https://github.com/stephanebruckert/GMines/issues">
             Support
           </a>
         </div>
@@ -104,7 +124,7 @@
             </div>
             <div class="meta pull-right" ng-show="selected.data">
               <div class="page">
-                Connected as {{ selected.data }}
+                {{ selected.data }}
               </div>
               <div class="breadcrumb-links">
                   <a role="button" ng-click="doLogout()">Disconnect</a>
