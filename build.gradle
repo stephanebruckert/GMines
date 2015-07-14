@@ -36,6 +36,9 @@ ext {
     grailsVersion = project.grailsVersion
     gradleWrapperVersion = project.gradleWrapperVersion
     jasmineDependencies = ['karma', 'karma-jasmine@2_0', 'karma-phantomjs-launcher', 'phantomjs']
+    bowerInstallerExec = file('node_modules/bower-installer/bower-installer')
+    bowerExec = file('node_modules/bower-installer/node_modules/bower/bin/bower')
+    assetLibsDir = file('grails-app/assets/libs/bower_components')
 }
 
 assets {
@@ -58,9 +61,31 @@ node {
     nodeModulesDir = file("${project.projectDir}")
 }
 
+task installBowerInstaller(type: NpmTask) {
+    args = ['install', 'bower-installer', '--silent']
+    outputs.dir 'node_modules/bower-installer'
+}
+
+task installAssetLibs(type: NodeTask, dependsOn: installBowerInstaller) {
+    script = bowerInstallerExec
+    inputs.file 'bower.json'
+    outputs.dir assetLibsDir
+}
+
 task installJasmine(type: NpmTask) {
     outputs.dir node.nodeModulesDir
     args = ['install'] + jasmineDependencies + ['--silent']
+}
+
+task cleanBowerCache(type: NodeTask, dependsOn: installBowerInstaller) {
+    script = bowerExec
+    args = ['cache', 'clean']
+}
+
+clean {
+    delete 'node_modules'
+    delete 'bower_components'
+    delete assetLibsDir
 }
 
 repositories {
