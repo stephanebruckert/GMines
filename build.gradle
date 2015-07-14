@@ -132,6 +132,9 @@ task wrapper(type: Wrapper) {
     gradleVersion = gradleWrapperVersion
 }
 
+run.dependsOn installAssetLibs
+assetCompile.dependsOn installAssetLibs
+
 task stage() {
     dependsOn clean, war
 }
