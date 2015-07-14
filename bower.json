@@ -28,6 +28,7 @@
         "angular": "1.3.x"
     },
     "install": {
-        "path": "grails-app/assets/libs/bower_components"
+        "path": "grails-app/assets/libs/bower_components",
+        "ignore": ["jquery"]
     }
 }
